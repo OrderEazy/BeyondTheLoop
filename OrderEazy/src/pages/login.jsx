@@ -22,7 +22,7 @@ const LoginPage = () => {
       }}>
       <div className="w-full max-w-xl space-y-8 bg-white p-20 rounded-xl shadow-lg transform transition duration-500 hover:scale-105"> {/* Increased max-width and padding */}
         <div>
-          <h2 className="text-center text-4xl font-extrabold text-gray-900">Sign in to FoodBot</h2> {/* Optional: Increased text size */}
+          <h2 className="text-center text-4xl font-extrabold text-gray-900">Sign in to OrderEazy</h2> {/* Optional: Increased text size */}
           <p className="mt-2 text-center text-sm text-gray-600">Your ultimate food destination</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSignIn}>
