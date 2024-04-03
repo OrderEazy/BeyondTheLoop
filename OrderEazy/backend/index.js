@@ -5,6 +5,21 @@ const cors = require("cors");
 const app = express();
 const axios = require('axios');
 
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+let connections = [];
+
+wss.on('connection', function connection(ws) {
+    console.log('A new client connected');
+    connections.push(ws);
+
+    ws.on('close', () => {
+        console.log('Client disconnected');
+        connections = connections.filter(conn => conn !== ws);
+    });
+});
+
 app.use(express.json());
 
 app.use(cors());
@@ -26,6 +41,17 @@ app.post("/menu", async function(req, res) {
           price: createPayload.price,
           description: createPayload.description
     })
+
+    // Broadcast the new order to all connected clients
+    connections.forEach((ws) => {
+      if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({
+              type: 'order-update',
+              action: 'create',
+              order: newOrder
+          }));
+      }
+  });
 
     res.json({
         msg: "Menu created"
