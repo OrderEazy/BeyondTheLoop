@@ -5,16 +5,39 @@ import OrderCard from '.././components/OrderCard';
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
 
-  // Placeholder for fetching orders from the backend
-  useEffect(() => {
-    // Replace with your actual backend API call
-    const fetchOrders = async () => {
-      const response = await fetch('http://localhost:3000/orders');
-      const data = await response.json();
-      setOrders(data);
-    };
+  // Function to fetch current list of orders from the server
+  const fetchOrders = async () => {
+      try {
+          const response = await fetch('http://localhost:3000/orders'); // Adjust the port and path as necessary
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          setOrders(data); // Update state with fetched orders
+      } catch (error) {
+          console.error("Failed to fetch orders:", error);
+      }
+  };
 
-    fetchOrders();
+  useEffect(() => {
+      const ws = new WebSocket('ws://localhost:8080');
+
+      ws.onopen = () => {
+          console.log("Connected to WebSocket");
+      };
+
+      ws.onmessage = (event) => {
+          const message = JSON.parse(event.data);
+          if (message.type === 'order-update') {
+              fetchOrders(); // Refetch orders on any update
+          }
+      };
+
+      fetchOrders(); // Fetch orders on component mount
+
+      return () => {
+          ws.close();
+      };
   }, []);
 
   return (
