@@ -42,16 +42,7 @@ app.post("/menu", async function(req, res) {
           description: createPayload.description
     })
 
-    // Broadcast the new order to all connected clients
-    connections.forEach((ws) => {
-      if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify({
-              type: 'order-update',
-              action: 'create',
-              order: newOrder
-          }));
-      }
-  });
+   
 
     res.json({
         msg: "Menu created"
@@ -64,13 +55,24 @@ app.post("/order", async function(req, res) {
 
    
     // put it in mongodb
-    await Order.create({
+    const newOrder= await Order.create({
         items: createPayload.items,
         total: createPayload.total
     })
 
+     // Broadcast the new order to all connected clients
+     connections.forEach((ws) => {
+      if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({
+              type: 'order-update',
+              action: 'create',
+              order: newOrder
+          }));
+      }
+  });
+
     res.json({
-        msg: "Menu created"
+        msg: "Order created"
     })
 })
 
