@@ -1,6 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import bg1 from '.././assets/bg1.png'; // Make sure this is the correct path to your image
+import p1 from '../assets/partner1.png';
+import p2 from '../assets/partner2.png';
+import p3 from '../assets/partner3.png';
+
+
 
 function HomePage() {
   let navigate = useNavigate(); // Hook for navigation
@@ -51,10 +56,17 @@ function HomePage() {
         </div>
       </section>
       {/* Partners Section */}
-      <section id="partners" className="p-8 bg-black" style={{height: "300px"}}>
-        <h2 className="text-2xl font-bold text-center mb-4" style={{textAlign:"left"}}>Our Partners</h2>
-        {/* Partners content */}
-      </section>
+      <section id="partners" className="bg-black text-white py-8">
+  <div className="container mx-auto px-4 text-center">
+    <h2 className="text-2xl font-bold mb-6">Our Partners</h2>
+    <div className="flex justify-center items-center space-x-12">
+      {/* Images from the assets folder */}
+      <img src={p1} alt="Partner Logo 1" className="w-32 h-auto" />
+<img src={p2} alt="Partner Logo 2" className="w-32 h-auto" />
+<img src={p3} alt="Partner Logo 3" className="w-32 h-auto" />
+    </div>
+  </div>
+</section>
       
       {/* About Section */}
       <section id="about" className="p-8" style={{ height: "auto", maxWidth: "600px", margin: "0 auto" }}>
