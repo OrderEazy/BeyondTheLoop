@@ -1,12 +1,14 @@
 // OrderCard.jsx
 import React from 'react';
 
-const OrderCard = ({ order }) => {
+const OrderCard = ({ key, order,orderId }) => {
+  console.log(orderId);
   return (
     <div className="border p-4 rounded-md shadow">
-      <h2 className="text-xl font-semibold mb-2">Order #{order.id}</h2>
+      <h2 className="text-xl font-semibold mb-2">Order # {orderId}</h2>
       {order.items.map((item, index) => (
         <div key={index} className="mb-2">
+          
           <p>{item.item}: {item.quantity} x ${item.price.toFixed(2)}</p>
         </div>
       ))}
