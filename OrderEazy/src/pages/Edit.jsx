@@ -65,7 +65,7 @@ const Edit = () => {
             </div>
           </div>
         ))}
-        <button type="submit" className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+        <button type="submit" className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-tangerine hover:bg-mid focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tangerine">
           Submit All Changes
         </button>
       </form>

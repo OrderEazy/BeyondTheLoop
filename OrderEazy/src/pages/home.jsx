@@ -19,7 +19,7 @@ function HomePage() {
       >
         <div className="container mx-auto flex flex-wrap lg:flex-nowrap items-start">
           {/* Content */}
-          <div className="z-10 flex flex-col justify-center h-full px-8 md:px-20 lg:px-32 lg:w-1/2">
+          <div className="z-0 flex flex-col justify-center h-full px-8 md:px-20 lg:px-32 lg:w-1/2">
             <div className="max-w-lg">
               <h1 className="font-bold leading-none">
                 <span className="text-5xl md:text-7xl text-white">HEY</span><br />
@@ -51,22 +51,59 @@ function HomePage() {
         </div>
       </section>
       {/* Partners Section */}
-      <section id="partners" className="p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">Our Partners</h2>
+      <section id="partners" className="p-8 bg-black" style={{height: "300px"}}>
+        <h2 className="text-2xl font-bold text-center mb-4" style={{textAlign:"left"}}>Our Partners</h2>
         {/* Partners content */}
       </section>
       
       {/* About Section */}
-      <section id="about" className="p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">About OrderEazy</h2>
+      <section id="about" className="p-8" style={{ height: "auto", maxWidth: "600px", margin: "0 auto" }}>
+        <h2 className="text-2xl font-bold text-center mb-4">About OrderEazy</h2>
         {/* About content */}
+        <p style={{textAlign: "center" , fontFamily:"'Roboto',sans-serif"}} >We are a dedicated group of students on a mission to revolutionize the food ordering experience for customers, whether they're dining in or ordering out. Fueled by a passion for innovation and a commitment to enhancing customer satisfaction, we've come together to challenge the status quo and introduce exciting new solutions to the realm of food service. With a blend of creativity, technical expertise, and a deep understanding of consumer needs, we're determined to make a meaningful impact in the way people interact with food establishments.</p>
       </section>
       
       {/* Contact Section */}
-      <section id="contact" className="p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">Contact Us</h2>
-        {/* Contact form */}
-      </section>
+      <footer className="bg-black text-white py-8">
+  <div className="container mx-auto px-4 flex flex-wrap justify-between items-start">
+    {/* Column 1 - Brand Name */}
+    <div className="flex flex-col mb-6">
+      <span className="font-bold text-lg mb-4">OrderEazy</span>
+      <nav className="flex flex-col">
+        <a href="/" className="text-yellow-500 hover:text-yellow-600 mb-2">Home</a>
+        <a href="/about" className="text-yellow-500 hover:text-yellow-600">About</a>
+        {/* Add more links as needed */}
+      </nav>
+    </div>
+
+    {/* Column 2 - Contact */}
+    <div className="flex flex-col mb-6">
+      <span className="font-bold text-lg mb-4">Contact</span>
+      <a href="mailto:example@example.com" className="text-yellow-500 hover:text-yellow-600 mb-2">Email</a>
+      <a href="/linkedin" className="text-yellow-500 hover:text-yellow-600">LinkedIn</a>
+      {/* Add more links as needed */}
+    </div>
+
+    {/* Column 3 - Newsletter */}
+    <div className="flex flex-col">
+      <span className="font-bold text-lg mb-4">Join our newsletter</span>
+      <form className="flex flex-col">
+        <input
+          type="email"
+          placeholder="Email Address"
+          className="mb-4 p-2 text-black"
+        />
+        <button
+          type="submit"
+          className="bg-yellow-500 text-white px-6 py-2 rounded-full font-bold shadow-lg hover:bg-yellow-600 transition-colors"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</footer>
+
     </div>
   );
 }
