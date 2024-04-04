@@ -1,34 +1,54 @@
+// Import React and necessary hooks
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '../assets/sample1.jpg'; // Add your image path here
+import backgroundImage from '../assets/sample1.jpg'; // Ensure this path is correct for your project
+
+// Firebase imports
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+// Import your Firebase configuration here
+import '.././firebase/firebase';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State to handle authentication errors
 
   const handleSignIn = async (event) => {
     event.preventDefault();
-    navigate('/dashboard');
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // On successful sign in, navigate to the dashboard
+        navigate('/dashboard');
+      })
+      .catch((error) => {
+        // Handle errors here, such as displaying an error message
+        const errorMessage = error.message;
+        setError(`Failed to sign in: ${errorMessage}`);
+      });
   };
 
   return (
     <div 
       className="min-h-screen flex items-center justify-center"
       style={{ 
-        backgroundImage: `url(${backgroundImage})`, // Background image is added here
+        backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
       }}>
-      <div className="w-full max-w-xl space-y-8 bg-white p-20 rounded-xl shadow-lg transform transition duration-500 hover:scale-105"> {/* Increased max-width and padding */}
+      <div className="w-full max-w-xl space-y-8 bg-white p-20 rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
         <div>
-          <h2 className="text-center text-4xl font-extrabold text-gray-900">Sign in to OrderEazy</h2> {/* Optional: Increased text size */}
+          <h2 className="text-center text-4xl font-extrabold text-gray-900">Sign in to OrderEazy</h2>
           <p className="mt-2 text-center text-sm text-gray-600">Your ultimate food destination</p>
+          {/* Display error message if authentication fails */}
+          {error && <p className="text-center text-red-500">{error}</p>}
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSignIn}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
               <input 
                 id="email-address" 
                 name="email" 
@@ -42,7 +62,6 @@ const LoginPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
               <input 
                 id="password" 
                 name="password" 
